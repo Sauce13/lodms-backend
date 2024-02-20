@@ -7,3 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Course.destroy_all
+
+#Create 20 classes
+20.times do
+    Course.create!(
+      name: Faker::Educator.course_name,
+      crn: Faker::Number.unique.number(digits: 5),
+      subject_area: Faker::Educator.subject,
+      instructor: Faker::Name.name,
+      college: "Letters and Science"
+    )
+  end
+  
