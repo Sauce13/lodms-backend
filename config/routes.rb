@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  resources :courses
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+    #API routes should be in /api/v1
+    namespace :api do
+      namespace :v1 do
+  
+        resources :courses
+
+      end
+    end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
