@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  crn: 1
+  subject-area: MyString
+  instructor: MyString
+  college: MyString
+
+two:
+  name: MyString
+  crn: 1
+  subject-area: MyString
+  instructor: MyString
+  college: MyString
