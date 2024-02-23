@@ -1,9 +1,34 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# seeds.rb
+
+require 'faker'
+
+class Student < ApplicationRecord
+  belongs_to :course
+end
+
+class Course < ApplicationRecord
+  has_many :students
+end
+
+# Destroy all existing records to ensure idempotency
+Course.destroy_all
+Student.destroy_all
+
+# Create 20 courses
+50.times do
+  course = Course.create!(
+    name: Faker::Educator.course_name,
+    crn: Faker::Number.unique.number(digits: 5),
+    subject_area: Faker::Educator.subject,
+    instructor: Faker::Name.name,
+    college: "Letters and Science"
+  )
+
+  # Create 30 students for each course
+  30.times do
+    course.students.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email(domain: 'ucdavis.edu'),
+    )
+  end
+end
