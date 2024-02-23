@@ -11,8 +11,11 @@ class Course < ApplicationRecord
 end
 
 # Destroy all existing records to ensure idempotency
-Course.destroy_all
-Student.destroy_all
+# !!! DELETE BEFORE PROD OR STORING DATA
+# Course.destroy_all
+# Student.destroy_all
+# Instructor.destroy_all
+# CourseInstructor.destroy_all
 
 # Create 20 courses
 50.times do
@@ -30,5 +33,25 @@ Student.destroy_all
       name: Faker::Name.name,
       email: Faker::Internet.email(domain: 'ucdavis.edu'),
     )
+  end
+
+  10.times do 
+    Instructor.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email(domain: 'ucdavis.edu'),
+    )
+  end
+
+
+  # for each course, create a new CourseInstructor and assign the id and instructor id to it
+  Course.find_each do |course|
+    # can be anywhere from 1 to 3 instructors each course
+    instructor_id = Instructor.pluck(:id).sample(rand(1..3))
+    instructor_id.each do |instructor_id|
+      CourseInstructor.create!(
+        course_id: course.id,
+        instructor_id: instructor_id,
+      )
+    end
   end
 end
