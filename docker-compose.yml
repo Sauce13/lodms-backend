@@ -1,0 +1,19 @@
+version: "3"
+services:
+  postgresql:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: lodms_backend_production
+      POSTGRES_USER: lodms_backend
+      POSTGRES_PASSWORD: Sauce12Sauce12
+
+  your_service_name:
+    build:
+      context: .
+    depends_on:
+      - postgresql
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Mount Docker socket
+    # Other configurations for your service

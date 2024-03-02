@@ -1,8 +1,19 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
+# Start PostgreSQL service using Docker Compose
+docker-compose up -d postgresql
+
+# Wait for PostgreSQL to start (optional but recommended)
+# You might need to install 'nc' package if not already available in your base image
+# until nc -z localhost 5432; do
+#   echo "Waiting for PostgreSQL to start..."
+#   sleep 1
+# done
+
+# Run database migrations or setup
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
   ./bin/rails db:prepare
 fi
 
+# Execute the passed command (e.g., starting Rails server)
 exec "${@}"

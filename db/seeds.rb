@@ -11,8 +11,9 @@ class Course < ApplicationRecord
 end
 
 # Destroy all existing records to ensure idempotency
-Course.destroy_all
 Student.destroy_all
+
+Course.destroy_all
 
 # Create 20 courses
 50.times do
