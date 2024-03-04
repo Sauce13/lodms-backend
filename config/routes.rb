@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
   
-        resources :courses
+        resources :courses do
+          member do
+            get 'instructors'
+          end
+        end
+        
         resources :students
         resources :instructors
 
