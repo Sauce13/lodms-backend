@@ -38,6 +38,14 @@ class Api::V1::CoursesController < ApplicationController
     @course.destroy!
   end
 
+  # GET /courses/:id/instructors
+  def instructors
+    course = Course.find(params[:id])
+    # Assuming you have a method in Course model to fetch instructor names
+    instructor_names = course.instructors.pluck(:name)
+    render json: instructor_names
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
