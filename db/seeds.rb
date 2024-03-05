@@ -17,6 +17,7 @@ end
 # Instructor.destroy_all
 # CourseInstructor.destroy_all
 
+
 # Create 20 courses
 50.times do
   course = Course.create!(
