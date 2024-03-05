@@ -1,21 +1,35 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :assignments
+      resources :users
+      resources :program_admins
+      resources :departments
+      resources :department_level_learning_outcomes
+      resources :performance_idicators
+      resources :program_level_rubric_items
+      resources :course_students
+      resources :course_rubric_items
+        
+      resources :courses do
+        member do
+          get 'instructors'
+        end
+      end
+      
+      resources :students
+      resources :instructors
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
     #API routes should be in /api/v1
-    namespace :api do
-      namespace :v1 do
-  
-        resources :courses do
-          member do
-            get 'instructors'
-          end
-        end
-        
-        resources :students
-        resources :instructors
+    # namespace :api do
+    #   namespace :v1 do
 
-      end
-    end
+
+    #   end
+    # end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
