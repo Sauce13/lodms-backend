@@ -27,14 +27,15 @@ end
     instructor: Faker::Name.name,
     college: "Letters and Science"
   )
+end
+
 
   # Create 30 students for each course
-  30.times do
-    course.students.create!(
+30.times do
+    Student.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email(domain: 'ucdavis.edu'),
     )
-  end
 end
 
 10.times do 
@@ -53,6 +54,14 @@ Course.find_each do |course|
     CourseInstructor.create!(
       course_id: course.id,
       instructor_id: instructor_id,
+    )
+  end
+
+  student_id = Student.pluck(:id).sample(rand(1..3))
+  student_id.each do |student_id|
+    CourseStudent.create!(
+      course_id: course.id,
+      student_id: student_id,
     )
   end
 end
