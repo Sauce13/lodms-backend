@@ -115,8 +115,15 @@ Course.all.each do |course|
     CoursePerformanceIndicator.create!(
       course: course,
       performance_indicator: pi
-    )
-  end
+
+end
+
+
+  # Create 30 students for each course
+30.times do
+    Student.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email(domain: 'ucdavis.edu'),    )
 end
 
 10.times do 
@@ -128,8 +135,25 @@ end
   end
 end
 
-PerformanceIndicator.all.each do |pi|
-  ProgramLevelRubricItem.create!(rubric_item: Faker::Lorem.sentence, performance_indicator: pi)
+
+# for each course, create a new CourseInstructor and assign the id and instructor id to it
+Course.find_each do |course|
+  # can be anywhere from 1 to 3 instructors each course
+  instructor_id = Instructor.pluck(:id).sample(rand(1..3))
+  instructor_id.each do |instructor_id|
+    CourseInstructor.create!(
+      course_id: course.id,
+      instructor_id: instructor_id,
+    )
+  end
+
+  student_id = Student.pluck(:id).sample(rand(1..3))
+  student_id.each do |student_id|
+    CourseStudent.create!(
+      course_id: course.id,
+      student_id: student_id,
+    )
+  end
 end
 
 50.times do
