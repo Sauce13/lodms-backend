@@ -137,5 +137,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_001049) do
   add_foreign_key "instructors", "users"
   add_foreign_key "performance_indicators", "department_level_learning_outcomes"
   add_foreign_key "program_admins", "users"
-  add_foreign_key "students", "courses"
 end

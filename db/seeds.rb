@@ -115,7 +115,8 @@ Course.all.each do |course|
     CoursePerformanceIndicator.create!(
       course: course,
       performance_indicator: pi
-
+    )
+  end
 end
 
 
