@@ -4,6 +4,7 @@ require 'faker'
 CourseStudent.delete_all
 CourseInstructor.delete_all
 DepartmentLevelLearningOutcome.delete_all
+PerformanceIndicator.delete_all
 Course.delete_all
 Instructor.delete_all
 ProgramAdmin.delete_all
@@ -18,6 +19,8 @@ departments.each do |name|
     DepartmentLevelLearningOutcome.create!(outcome_description:Faker::Company.bs, department_id: department.id)
   end
 end
+
+
 
 
 # Seed Program Admins
@@ -43,6 +46,9 @@ end
   )
 
   rand(1..3).times do
+    performance_indicator = PerformanceIndicator.create!(
+      indicator_Description: Faker::Company.bs
+    )
     instructor = Instructor.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email(domain: 'ucdavis.edu'),
@@ -54,12 +60,20 @@ end
       course_id: course1.id,
       instructor_id: instructor.id
     )
+    CoursePerformanceIndicator.create!(
+      course_id: course1.id,
+      performance_indicator_id: performance_indicator.id
+    )
     end
 
     if rand(2).zero?
       CourseInstructor.create!(
         course_id: course2.id,
         instructor_id: instructor.id
+      )
+      CoursePerformanceIndicator.create!(
+        course_id: course1.id,
+        performance_indicator_id: performance_indicator.id
       )
     end
   end
