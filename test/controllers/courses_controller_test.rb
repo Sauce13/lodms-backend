@@ -12,7 +12,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create course" do
     assert_difference("Course.count") do
-      post courses_url, params: { course: { college: @course.college, crn: @course.crn, instructor: @course.instructor, name: @course.name, subject-area: @course.subject-area } }, as: :json
+      post courses_url, params: { course: { crn: @course.crn, name: @course.name } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update course" do
-    patch course_url(@course), params: { course: { college: @course.college, crn: @course.crn, instructor: @course.instructor, name: @course.name, subject-area: @course.subject-area } }, as: :json
+    patch course_url(@course), params: { course: { crn: @course.crn, name: @course.name } }, as: :json
     assert_response :success
   end
 

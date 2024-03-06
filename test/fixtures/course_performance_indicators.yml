@@ -2,8 +2,8 @@
 
 one:
   course: one
-  PerformanceIndicator: one
+  indicator: one
 
 two:
   course: two
-  PerformanceIndicator: two
+  indicator: two

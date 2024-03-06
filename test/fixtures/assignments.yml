@@ -1,17 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-
 one:
-  data_taken: 2024-03-04
+  date_taken: 2024-03-06
 
 two:
-  data_taken: 2024-03-04
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+  date_taken: 2024-03-06
