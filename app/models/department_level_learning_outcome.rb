@@ -1,0 +1,2 @@
+class DepartmentLevelLearningOutcome < ApplicationRecord
+end

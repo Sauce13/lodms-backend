@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_06_223729) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_231149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_223729) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "department_level_learning_outcomes", force: :cascade do |t|
+    t.text "outcome_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -52,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_223729) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_instructors_on_department_id"
   end
 
   create_table "program_admins", force: :cascade do |t|
@@ -59,6 +67,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_223729) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_program_admins_on_department_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -72,4 +82,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_223729) do
   add_foreign_key "course_instructors", "instructors"
   add_foreign_key "course_students", "courses"
   add_foreign_key "course_students", "students"
+  add_foreign_key "instructors", "departments"
+  add_foreign_key "program_admins", "departments"
 end

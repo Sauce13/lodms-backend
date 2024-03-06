@@ -4,9 +4,9 @@ require 'faker'
 CourseStudent.delete_all
 CourseInstructor.delete_all
 Course.delete_all
-Department.delete_all
 Instructor.delete_all
 ProgramAdmin.delete_all
+Department.delete_all
 Student.delete_all
 
 # Seed Departments
@@ -15,19 +15,14 @@ departments.each do |name|
   Department.create!(name: name)
 end
 
-# Seed Instructors
-10.times do
-  Instructor.create!(
-    name: Faker::Name.name,
-    email: Faker::Internet.email(domain: 'ucdavis.edu')
-  )
-end
 
 # Seed Program Admins
 5.times do
   ProgramAdmin.create!(
     name: Faker::Name.name,
-    email: Faker::Internet.email(domain: 'ucdavis.edu')
+    email: Faker::Internet.email(domain: 'ucdavis.edu'),
+    department_id: Department.pluck(:id).sample
+
   )
 end
 
@@ -46,7 +41,8 @@ end
   rand(1..3).times do
     instructor = Instructor.create!(
       name: Faker::Name.name,
-      email: Faker::Internet.email(domain: 'ucdavis.edu')
+      email: Faker::Internet.email(domain: 'ucdavis.edu'),
+      department_id: Department.pluck(:id).sample
     )
 
     if rand(2).zero?
