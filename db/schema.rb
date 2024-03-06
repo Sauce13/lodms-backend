@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_06_231149) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_231959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_231149) do
     t.text "outcome_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id", null: false
+    t.index ["department_id"], name: "index_department_level_learning_outcomes_on_department_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -60,6 +62,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_231149) do
     t.datetime "updated_at", null: false
     t.bigint "department_id"
     t.index ["department_id"], name: "index_instructors_on_department_id"
+  end
+
+  create_table "performance_indicators", force: :cascade do |t|
+    t.text "indicator_Description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "program_admins", force: :cascade do |t|
@@ -82,6 +90,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_231149) do
   add_foreign_key "course_instructors", "instructors"
   add_foreign_key "course_students", "courses"
   add_foreign_key "course_students", "students"
+  add_foreign_key "department_level_learning_outcomes", "departments"
   add_foreign_key "instructors", "departments"
   add_foreign_key "program_admins", "departments"
 end

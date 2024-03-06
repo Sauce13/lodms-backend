@@ -3,6 +3,7 @@ require 'faker'
 # Clear existing data
 CourseStudent.delete_all
 CourseInstructor.delete_all
+DepartmentLevelLearningOutcome.delete_all
 Course.delete_all
 Instructor.delete_all
 ProgramAdmin.delete_all
@@ -12,7 +13,10 @@ Student.delete_all
 # Seed Departments
 departments = ['Computer Science', 'Mathematics', 'Physics', 'Biology', 'Chemistry']
 departments.each do |name|
-  Department.create!(name: name)
+  department = Department.create!(name: name)
+  rand(1..3).times do
+    DepartmentLevelLearningOutcome.create!(outcome_description:Faker::Company.bs, department_id: department.id)
+  end
 end
 
 

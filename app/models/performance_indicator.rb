@@ -1,0 +1,2 @@
+class PerformanceIndicator < ApplicationRecord
+end
