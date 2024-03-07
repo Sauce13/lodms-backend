@@ -9,11 +9,15 @@ services:
       POSTGRES_USER: lodms_backend
       POSTGRES_PASSWORD: Sauce12Sauce12
 
-  your_service_name:
+  lodms_backend:
     build:
       context: .
     depends_on:
       - postgresql
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Mount Docker socket
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/rails
+    ports:
+      - "3000:3000"
+      # Mount Docker socket
     # Other configurations for your service
