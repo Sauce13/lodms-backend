@@ -3,7 +3,7 @@ class Api::V1::DepartmentsController < ApplicationController
 
   # GET /api/v1/departments
   def index
-    @api_v1_departments = Api::V1::Department.all
+    @api_v1_departments = Department.all
 
     render json: @api_v1_departments
   end
