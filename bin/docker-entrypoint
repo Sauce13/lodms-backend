@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Start PostgreSQL service using Docker Compose
-docker-compose up -d postgresql
+# docker-compose up -d postgresql
 
 # Wait for PostgreSQL to start (optional but recommended)
 # You might need to install 'nc' package if not already available in your base image
@@ -11,9 +11,13 @@ docker-compose up -d postgresql
 # done
 
 # Run database migrations or setup
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
-fi
+# if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+# fi
+# ./bin/rails db:create
+
 
 # Execute the passed command (e.g., starting Rails server)
-exec "${@}"
+# exec "${@}"
+
+# ./bin/rails s -b 0.0.0.0
+sleep infinity

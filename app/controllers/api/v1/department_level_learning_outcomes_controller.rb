@@ -3,7 +3,7 @@ class Api::V1::DepartmentLevelLearningOutcomesController < ApplicationController
 
   # GET /api/v1/department_level_learning_outcomes
   def index
-    @api_v1_department_level_learning_outcomes = Api::V1::DepartmentLevelLearningOutcome.all
+    @api_v1_department_level_learning_outcomes = DepartmentLevelLearningOutcome.all
 
     render json: @api_v1_department_level_learning_outcomes
   end
@@ -15,10 +15,10 @@ class Api::V1::DepartmentLevelLearningOutcomesController < ApplicationController
 
   # POST /api/v1/department_level_learning_outcomes
   def create
-    @api_v1_department_level_learning_outcome = Api::V1::DepartmentLevelLearningOutcome.new(api_v1_department_level_learning_outcome_params)
+    @api_v1_department_level_learning_outcome = DepartmentLevelLearningOutcome.new(api_v1_department_level_learning_outcome_params)
 
     if @api_v1_department_level_learning_outcome.save
-      render json: @api_v1_department_level_learning_outcome, status: :created, location: @api_v1_department_level_learning_outcome
+      render json: @api_v1_department_level_learning_outcome, status: :created, location: api_v1_department_level_learning_outcome_url(@api_v1_department_level_learning_outcome)
     else
       render json: @api_v1_department_level_learning_outcome.errors, status: :unprocessable_entity
     end
@@ -41,11 +41,9 @@ class Api::V1::DepartmentLevelLearningOutcomesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_v1_department_level_learning_outcome
-      @api_v1_department_level_learning_outcome = Api::V1::DepartmentLevelLearningOutcome.find(params[:id])
+      @api_v1_department_level_learning_outcome = DepartmentLevelLearningOutcome.find(params[:id])
     end
-
-    # Only allow a list of trusted parameters through.
     def api_v1_department_level_learning_outcome_params
-      params.fetch(:api_v1_department_level_learning_outcome, {})
+      params.require(:api_v1_department_level_learning_outcome).permit(:outcome_description, :department_id)
     end
 end
