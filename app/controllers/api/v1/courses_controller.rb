@@ -10,8 +10,16 @@ class Api::V1::CoursesController < ApplicationController
 
   # GET /courses/1
   def show
-    render json: @course, include: :students
+    course = Course.find(params[:id])
+    course_as_json = course.as_json(include: {
+      students: {},
+      performance_indicators: {}
+    })
+  
+    render json: course_as_json
   end
+  
+  
 
   # POST /courses
   def create
