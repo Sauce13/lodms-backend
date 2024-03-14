@@ -7,10 +7,11 @@ Rails.application.routes.draw do
       resources :program_admins
       resources :departments
       resources :department_level_learning_outcomes
-      resources :performance_idicators
+      resources :performance_indicators
       resources :program_level_rubric_items
       resources :course_students
       resources :course_rubric_items
+      resources :course_performance_indicator
         
       resources :courses do
         member do
