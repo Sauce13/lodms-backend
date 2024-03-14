@@ -10,12 +10,12 @@ class Api::V1::DepartmentsController < ApplicationController
 
   # GET /api/v1/departments/1
   def show
-    render json: @api_v1_department
+    render json: @api_v1_department, include: :department_level_learning_outcomes
   end
 
   # POST /api/v1/departments
   def create
-    @api_v1_department = Api::V1::Department.new(api_v1_department_params)
+    @api_v1_department = Department.new(api_v1_department_params)
 
     if @api_v1_department.save
       render json: @api_v1_department, status: :created, location: @api_v1_department
@@ -41,7 +41,7 @@ class Api::V1::DepartmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_v1_department
-      @api_v1_department = Api::V1::Department.find(params[:id])
+      @api_v1_department = Department.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

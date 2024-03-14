@@ -4,6 +4,7 @@ require 'faker'
 CourseStudent.delete_all
 CourseInstructor.delete_all
 DepartmentLevelLearningOutcome.delete_all
+CoursePerformanceIndicator.delete_all
 PerformanceIndicator.delete_all
 Course.delete_all
 Instructor.delete_all
